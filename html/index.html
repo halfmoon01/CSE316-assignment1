@@ -1,0 +1,102 @@
+<!-- Sanghyun Jun-->
+<!-- Sanghyun.Jun.1@stonybrook.edu-->
+
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset = "UTF-8">
+    <meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
+    <title>Main Page</title>
+    <link rel = "stylesheet" href = "../css/style.css">
+</head>
+<body>
+    <div class = "container">
+        <nav class="navbar-large">
+            <ul>
+                <!--- left icon for home icon -->
+                <li class = "left-icon">
+                    <div>
+                        <a href="../html/index.html"><img src="../AssignImages/home.png" width="30" height="30"></a>
+                    </div>
+                </li>
+                <!--- center for 3 elements(list, reservation, page) -->
+                <div class="center-icons">
+                    <li><a href="../html/facilityList.html">Facility List</a></li>
+                    <li><a href="../html/facilityReservation.html">Facility Reservation</a></li>
+                    <li class="dropdown">
+                        <a href="#">My Page <span class="upsidedown-triangle"></span></a>
+                        <div class="dropdown-content">
+                            <a href="../html/myInfo.html">My Information</a>
+                            <a href="../html/myReservation.html">My Reservation</a>
+                        </div>
+                    </li>
+                </div>
+                <!--- right icon for home icon -->
+                <li class ="right-icon">
+                    <div>
+                        <img src="../AssignImages/user.png" width="30" height="30">
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <!-- navbar for small size  !-->
+        <nav class = "navbar-small">
+            <ul>
+                <li>
+                    <div>
+                        <a href = "../html/index.html"><img src= ../AssignImages/home.png  width="30" height="30" ></a>
+                    </div>
+                </li>
+                <li id = "menu-icon">   
+                    <div>
+                        <a href = "#"></a><img src= ../AssignImages/menu.png  width="30" height="30" ></a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    
+        <!-- menu bar !-->
+        <nav class = "side-bar" id = "side-bar">
+            <ul>
+                <li><a href = "../html/facilityList.html">Facility List</a></li>
+                <li><a href = "../html/facilityReservation.html">Facility Reservation</a></li>
+                <li class = "dropdown">
+                    <a href="#">My Page <span class = "upsidedown-triangle"></span></a>
+                    <div class= "dropdown-content">
+                        <a href="../html/myInfo.html">My Information</a>
+                        <a href="../html/myReservation.html">My Reservation</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    
+        <!-- using DOM, if I 'click' menuicon, sidebar opens -->
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuicon = document.getElementById('menu-icon');
+            const sidebar = document.getElementById('side-bar');
+            menuicon.addEventListener('click', function(event) {
+                event.preventDefault(); 
+                sidebar.classList.toggle('open'); 
+            });
+        });
+        </script>
+
+    <div>
+        <h1>Facility Reservation App</h1>
+        <ul style="list-style-type:square">
+            <li>Facility List</li>
+            <p>Use this to display a list of Facilities with site information and pictures.</p>
+            <li>Facility Reservation</li>
+            <p>Use this to Reserve a facility <a href="../html/facilityReservation.html">[Application Form]</a> </p>
+            <li>My page</li>
+            <p>This holds information related to you.</p>
+            <ul>
+                <li><strong>My Information</strong> - Your profile</li>
+                <li><strong>Reservation History</strong> - Your list of reservations</li>
+            </ul>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

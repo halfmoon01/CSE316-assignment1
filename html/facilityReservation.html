@@ -1,0 +1,187 @@
+<!-- Sanghyun Jun-->
+<!-- Sanghyun.Jun.1@stonybrook.edu-->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel = "stylesheet" href = "../css/style.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <title>facilityReservation</title>
+    </head>
+    <body>
+        <div class = "container">
+            <!-- navbar for big size  !-->
+            <nav class="navbar-large">
+            <ul>
+                <!--- left icon for home icon -->
+                <li class = "left-icon">
+                    <div>
+                        <a href="../html/index.html"><img src="../AssignImages/home.png" width="30" height="30"></a>
+                    </div>
+                </li>
+                <!--- center for 3 elements(list, reservation, page) -->
+                <div class="center-icons">
+                    <li><a href="../html/facilityList.html">Facility List</a></li>
+                    <li><a href="../html/facilityReservation.html">Facility Reservation</a></li>
+                    <li class="dropdown">
+                        <a href="#">My Page <span class="upsidedown-triangle"></span></a>
+                        <div class="dropdown-content">
+                            <a href="../html/myInfo.html">My Information</a>
+                            <a href="../html/myReservation.html">My Reservation</a>
+                        </div>
+                    </li>
+                </div>
+                <!--- right icon for home icon -->
+                <li class ="right-icon">
+                    <div>
+                        <img src="../AssignImages/user.png" width="30" height="30">
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <!-- navbar for small size  !-->
+        <nav class = "navbar-small">
+            <ul>
+                <li>
+                    <div>
+                        <a href = "../html/index.html"><img src= ../AssignImages/home.png  width="30" height="30" ></a>
+                    </div>
+                </li>
+                <li id = "menu-icon">   
+                    <div>
+                        <a href = "#"></a><img src= ../AssignImages/menu.png  width="30" height="30" ></a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    
+        <!-- menu bar !-->
+        <nav class = "side-bar" id = "side-bar">
+            <ul>
+                <li><a href = "../html/facilityList.html">Facility List</a></li>
+                <li><a href = "../html/facilityReservation.html">Facility Reservation</a></li>
+                <li class = "dropdown">
+                    <a href="#">My Page <span class = "upsidedown-triangle"></span></a>
+                    <div class= "dropdown-content">
+                        <a href="../html/myInfo.html">My Information</a>
+                        <a href="../html/myReservation.html">My Reservation</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    
+        <!-- using DOM, if I 'click' menuicon, sidebar opens -->
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuicon = document.getElementById('menu-icon');
+            const sidebar = document.getElementById('side-bar');
+            menuicon.addEventListener('click', function(event) {
+                event.preventDefault(); 
+                sidebar.classList.toggle('open'); 
+            });
+        });
+        </script>
+
+        <!-- using form, get every answers and go to do Submit function-->
+        <form action="javascript:" onsubmit= "doSubmit(this)">
+            <div>
+                <select id="select" onchange="selectFacility()">
+                <option value="Gym" selected>Gym</option>
+                <option value="Auditorium">Auditorium</option>
+                <option value="Swimming Pool">Swimming Pool</option>
+                <option value="Seminar Room">Seminar Room</option>
+                <option value="Conference Room">Conference Room</option>
+                <option value="Library">Library</option>
+                </select>
+            </div>
+            <div id="one-facility"  class="facility-container"></div>
+            <div style="margin: 15px">
+                <label>Date to be Used: </label>
+                <input id="date" type="date">
+            </div>
+            <div style="margin: 15px">
+                <label>Number of People</label>
+                <input id="number" type="number">
+            </div>
+            <div style="margin: 15px">
+                <label>Are you affiliated with SUNY Korea?</label><br>
+                <input type="radio" name="SUNY Korea" value="Yes">
+                <label for="yes">Yes</label><br>
+                <input type="radio" name="SUNY Korea" value="No">
+                <label for="no">No</label>
+            </div>
+            <div style = "margin: 15px">
+                <label>Purpose of Use:</label><br>
+                <!-- Use textarea to get large sentence-->
+                <textarea id = "purpose" rows="5" cols="40"></textarea>
+            </div>
+            <button class="button_type2" type="submit">Submit</button>
+        </form>
+
+        <!-- select function-->
+        <script src = "../js/facilities.js"></script>
+        <script>
+            function selectFacility() {
+                const facilityList = document.getElementById('one-facility');
+                var selectedName = document.getElementById("select").value
+                // finding the selectedName by using facilities.find
+                const found = facilities.find(f => f.name === selectedName);
+                facilityList.innerHTML = '';
+                const facility = document.createElement('div');
+                facility.className = 'facility';
+                facility.innerHTML = `
+                    <img src= "${found.image}">
+                    <div class="facility-details">
+                    <h2>${found.name}</h2>
+                    <p>${found.description}</p>
+                    <p><i class="material-icons">people</i> ${found.capacity}</p>
+                    <p><i class="material-icons">location_on</i> ${found.location}</p>
+                    <p><i class="material-icons">info</i> ${found.availableTo}</p>
+                </div>
+                `;
+                facilityList.appendChild(facility);
+            }
+            /*do this to show right away the selectedFacilty*/
+            window.onload = selectFacility;
+        </script>
+
+        <!-- this is my doSubmit function to get every element and save to my localStorage-->
+        <script>
+        function doSubmit(form) {
+            const selectedName = document.getElementById("select").value
+            const found = facilities.find(f => f.name === selectedName);
+            const date = new Date(document.getElementById('date').value);
+            const number = parseInt(document.getElementById('number').value);
+            const isSUNY = form["SUNY Korea"].value;
+            const purpose = document.getElementById('purpose').value;
+            const today = new Date();
+            
+            // error messages
+            if (number > found.capacity){
+                alert("Cannot reserve");
+                return false;
+            }
+            if (date < today){
+                alert("Cannot reserve");
+                return false;
+            }
+            if(found.availableTo === "Only for SUNY Korea" && isSUNY === "No"){
+                alert("Cannot reserve");
+                return false;
+            }
+
+            const MyReservation = {
+                facility: selectedName,
+                date: date,
+                numberOfPeople: number,
+                affiliation: isSUNY,
+                purpose: purpose
+            };
+            // saving to localStroage using JSON
+            localStorage.setItem('MyReservation', JSON.stringify(MyReservation));
+            alert("Data Saved!!!!");
+        }
+        </script>
+        </div>
+    </body>
+</html>

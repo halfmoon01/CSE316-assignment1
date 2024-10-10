@@ -1,0 +1,237 @@
+<!-- Sanghyun Jun-->
+<!-- Sanghyun.Jun.1@stonybrook.edu-->
+
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset = "UTF-8">
+    <meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
+    <link rel = "stylesheet" href = "../css/style.css">
+    <title>MyInfo</title>
+</head>
+<body>
+    <div class = "container">
+        <!-- navbar for big size  !-->
+        <nav class="navbar-large">
+            <ul>
+                <!--- left icon for home icon -->
+                <li class = "left-icon">
+                    <div>
+                        <a href="../html/index.html"><img src="../AssignImages/home.png" width="30" height="30"></a>
+                    </div>
+                </li>
+                <!--- center for 3 elements(list, reservation, page) -->
+                <div class="center-icons">
+                    <li><a href="../html/facilityList.html">Facility List</a></li>
+                    <li><a href="../html/facilityReservation.html">Facility Reservation</a></li>
+                    <li class="dropdown">
+                        <a href="#">My Page <span class="upsidedown-triangle"></span></a>
+                        <div class="dropdown-content">
+                            <a href="../html/myInfo.html">My Information</a>
+                            <a href="../html/myReservation.html">My Reservation</a>
+                        </div>
+                    </li>
+                </div>
+                <!--- right icon for home icon -->
+                <li class ="right-icon">
+                    <div>
+                        <img src="../AssignImages/user.png" width="30" height="30">
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <!-- navbar for small size  !-->
+        <nav class = "navbar-small">
+            <ul>
+                <li>
+                    <div>
+                        <a href = "../html/index.html"><img src= ../AssignImages/home.png  width="30" height="30" ></a>
+                    </div>
+                </li>
+                <li id = "menu-icon">   
+                    <div>
+                        <a href = "#"></a><img src= ../AssignImages/menu.png  width="30" height="30" ></a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    
+        <!-- menu bar !-->
+        <nav class = "side-bar" id = "side-bar">
+            <ul>
+                <li><a href = "../html/facilityList.html">Facility List</a></li>
+                <li><a href = "../html/facilityReservation.html">Facility Reservation</a></li>
+                <li class = "dropdown">
+                    <a href="#">My Page <span class = "upsidedown-triangle"></span></a>
+                    <div class= "dropdown-content">
+                        <a href="../html/myInfo.html">My Information</a>
+                        <a href="../html/myReservation.html">My Reservation</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    
+        <!-- using DOM, if I 'click' menuicon, sidebar opens -->
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuicon = document.getElementById('menu-icon');
+            const sidebar = document.getElementById('side-bar');
+            menuicon.addEventListener('click', function(event) {
+                event.preventDefault(); 
+                sidebar.classList.toggle('open'); 
+            });
+        });
+        </script>
+
+        <div class = "myInfo">
+            <h1>User Information</h1>
+            <figure>
+                <div>
+                    <img src= ../AssignImages/user.png  width="150" height="150" ></a>
+                </div>
+            </figure>
+            <button class="button_type1" type="button" id = "change-image-button">Change Image</button>
+            <p>Email: Sanghyun.Jun.1@stonybrook.edu</p>
+            <p>Password: ***** <button class="button_type1" type="button" id = "change-pwd-button">Change Password</button></p>
+            <p>Name: Sanghyun Jun <button class="button_type1" type="button" id = "change-name-button">Change Name</button></p>
+        </div>
+
+        <!-- changing image dialog-->
+        <div id="Cimage-popup" class="dialog">
+            <div class="content">
+            <span id = "close-image-icon" class="close-icon">&times;</span>
+            <p><strong>Change your image</strong></p>
+            <!-- border line-->
+            <hr class="line">
+            <form>
+                <label>New Image</label><br>
+                <div class = "line2">
+                    <label for="fileInput" class="choose-file">Choose File</label>
+                    <input type="file" id="fileInput" class="file-select">
+                    <span id="fileName"> No file chosen</span>
+                </div>
+                <!-- border line-->
+                <hr class="line">
+                <div class="button-group">
+                    <button type="button" id ="close-image-button" class = "close-button">Close</button>
+                    <button type="button" id ="save-image-button" class = "save-button">Save changes</button>
+                </div>
+            </form>
+            </div>
+        </div>
+        <!-- changing pwd dialog-->
+        <div id="Cpwd-popup" class="dialog">
+            <div class="content">
+            <span id = "close-pwd-icon" class="close-icon">&times;</span>
+            <p><strong>Change your image</strong></p>
+            <!-- border line-->
+            <hr class="line">
+            <form>
+                <label for="newPassword">New Password</label><br>
+                <div class = "line2">
+                    <input type="password" placeholder = "Enter the new password" id="newPassword" class ="new-input"><br>
+                </div>
+                <!-- border line-->
+                <hr class="line">
+                <div class="button-group">
+                    <button type="button" id ="close-pwd-button" class = "close-button">Close</button>
+                    <button type="button" id ="save-pwd-button" class = "save-button">Save changes</button>
+                </div>
+            </form>
+            </div>
+        </div>
+        <!-- changing name dialog-->
+        <div id="Cname-popup" class="dialog">
+            <div class="content">
+            <span id = "close-name-icon" class="close-icon">&times;</span>
+            <p><strong>Change your name<strong></p>
+            <!-- border line-->
+            <hr class="line">
+            <form>
+                <label for="newName">New Name</label><br>
+                <div class = "line2">
+                    <input type="text" placeholder = "Enter the new name" id="newName" class ="new-input"><br>
+                </div>
+                <!-- border line-->
+                <hr class="line">
+                <div class="button-group">
+                    <button type="button" id ="close-name-button" class = "close-button">Close</button>
+                    <button type="button" id ="save-name-button" class = "save-button">Save changes</button>
+                </div>
+            </form>
+            </div>
+        </div>
+
+        <script>
+            // get every element by using id
+            var popupImage = document.getElementById("Cimage-popup");
+            var changeImageButton = document.getElementById("change-image-button");
+            var closeImageIcon = document.getElementById("close-image-icon");
+            var closeImageButton =  document.getElementById("close-image-button");
+            var saveImageButton = document.getElementById("save-image-button");
+
+            var popupPwd = document.getElementById("Cpwd-popup");
+            var changePwdButton = document.getElementById("change-pwd-button");
+            var closePwdIcon = document.getElementById("close-pwd-icon");
+            var closePwdButton =  document.getElementById("close-pwd-button");
+            var savePwdButton = document.getElementById("save-pwd-button");
+
+            var popupName = document.getElementById("Cname-popup");
+            var changeNameButton = document.getElementById("change-name-button");
+            var closeNameIcon = document.getElementById("close-name-icon");
+            var closeNameButton =  document.getElementById("close-name-button");
+            var saveNameButton = document.getElementById("save-name-button");
+            
+            /*for popupImage -> serveral commands for click*/
+            changeImageButton.onclick = function() { 
+                changeImageButton.classList.add('clicked');
+                popupImage.style.display = "block";
+            }
+            closeImageIcon.onclick = function() {
+                popupImage.style.display = "none";
+                changeImageButton.classList.remove('clicked');
+            }
+            closeImageButton.onclick = function() {
+                popupImage.style.display = "none";
+                changeImageButton.classList.remove('clicked');
+            } 
+            saveImageButton.onclick = function(){
+                alert("Not currently available");
+            }
+
+            /*for popupPwd -> serveral commands for click*/
+            changePwdButton.onclick = function() {
+                changePwdButton.classList.add('clicked');
+                popupPwd.style.display = "block";
+            }
+            closePwdIcon.onclick = function() {
+                popupPwd.style.display = "none";
+                changePwdButton.classList.remove('clicked');
+            }
+            closePwdButton.onclick = function() {
+                popupPwd.style.display = "none";
+                changePwdButton.classList.remove('clicked');
+            }
+            savePwdButton.onclick = function() {
+                alert("Password change is not currently available.");
+            }
+            /*for popupPwd -> serveral commands for click*/
+            changeNameButton.onclick = function() {
+                changeNameButton.classList.add('clicked');
+                popupName.style.display = "block";
+            }
+            closeNameIcon.onclick = function() {
+                popupName.style.display = "none";
+                changeNameButton.classList.remove('clicked');
+            }
+            closeNameButton.onclick = function() {
+                popupName.style.display = "none";
+                changeNameButton.classList.remove('clicked');
+            }
+            saveNameButton.onclick = function() {
+                alert("Name change is not currently available.");
+            }
+        </script>
+    </div>
+    </body>
+</html>
